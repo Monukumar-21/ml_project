@@ -16,11 +16,3 @@ logging.basicConfig(
     level=logging.INFO,
 )
 
-# 4. Implementation Example
-if __name__ == "__main__":
-    try:
-        logging.info("Starting the division operation")
-        result = 10 / 0
-    except Exception as e:
-        logging.error("Divide by Zero Error")
-        raise CustomException(e, sys)
