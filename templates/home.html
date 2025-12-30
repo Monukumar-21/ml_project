@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Student Performance Prediction</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 50px; background-color: #f7f7f7; }
+        .login { max-width: 500px; margin: auto; background: white; padding: 20px; border-radius: 8px; box-shadow: 0px 0px 10px rgba(0,0,0,0.1); }
+        h1 { text-align: center; color: #333; }
+        .form-group { margin-bottom: 15px; }
+        label { display: block; margin-bottom: 5px; font-weight: bold; }
+        select, input { width: 100%; padding: 8px; border: 1px solid #ccc; border-radius: 4px; box-sizing: border-box; }
+        input[type="submit"] { background-color: #4CAF50; color: white; border: none; cursor: pointer; margin-top: 10px; font-size: 16px;}
+        input[type="submit"]:hover { background-color: #45a049; }
+        .result { margin-top: 20px; text-align: center; font-size: 1.2rem; color: #007bff; }
+    </style>
+</head>
+<body>
+    <div class="login">
+       <h1>Predict Student Math Score</h1>
+       <form action="{{ url_for('predict_datapoint')}}" method="post">
+            <div class="form-group">
+                <label>Gender</label>
+                <select name="gender" required>
+                    <option value="" selected disabled>Select your Gender</option>
+                    <option value="male">Male</option>
+                    <option value="female">Female</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label>Race or Ethnicity</label>
+                <select name="ethnicity" required>
+                    <option value="" selected disabled>Select Ethnicity</option>
+                    <option value="group A">Group A</option>
+                    <option value="group B">Group B</option>
+                    <option value="group C">Group C</option>
+                    <option value="group D">Group D</option>
+                    <option value="group E">Group E</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label>Parental Level of Education</label>
+                <select name="parental_level_of_education" required>
+                    <option value="" selected disabled>Select Parent Education</option>
+                    <option value="associate's degree">Associate's Degree</option>
+                    <option value="bachelor's degree">Bachelor's Degree</option>
+                    <option value="high school">High School</option>
+                    <option value="master's degree">Master's Degree</option>
+                    <option value="some college">Some College</option>
+                    <option value="some high school">Some High School</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label>Lunch Type</label>
+                <select name="lunch" required>
+                    <option value="standard">Standard</option>
+                    <option value="free/reduced">Free/Reduced</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label>Test Preparation Course</label>
+                <select name="test_preparation_course" required>
+                    <option value="none">None</option>
+                    <option value="completed">Completed</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label>Reading Score (0-100)</label>
+                <input type="number" name="reading_score" placeholder="Enter Reading Score" min="0" max="100" required />
+            </div>
+            <div class="form-group">
+                <label>Writing Score (0-100)</label>
+                <input type="number" name="writing_score" placeholder="Enter Writing Score" min="0" max="100" required />
+            </div>
+            <input type="submit" value="Predict Score">
+       </form>
+
+       {% if results %}
+       <div class="result">
+          <h3>The prediction is: {{results}}</h3>
+       </div>
+       {% endif %}
+    </div>
+</body>
+</html>
